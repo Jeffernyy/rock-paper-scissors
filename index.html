@@ -7,27 +7,45 @@
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
+    <meta name="author" content="rock paper scissors" />
+    <meta name="description" content="rock paper scissors" />
+    <meta name="keywords" content="rock paper scissors" />
     <link rel="stylesheet" href="style.css" />
-    <script defer src="advanced.js"></script>
+    <script src="script.js" defer></script>
   </head>
   <body>
     <div class="container">
-      <div class="inner">
-        <div class="text">
-          <h1 class="title">Rock Paper Scissors</h1>
+      <div class="wrapper">
+        <div class="textbox">
+          <h1 class="title fs-md">Rock Paper Scissors</h1>
+          <p class="subtitle fs-sm">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Illo quis
+            esse molestias laboriosam totam magnam. Et magni aperiam fuga?
+            Soluta voluptatem modi dolores sit laborum!
+          </p>
         </div>
-        <div class="form">
-          <textarea id="display">...</textarea>
-          <div class="buttons">
-            <button class="btn" data-choice="rock">Rock</button>
-            <button class="btn" data-choice="paper">Paper</button>
-            <button class="btn" data-choice="scissors">Scissors</button>
+        <div class="formbox">
+          <textarea id="result" class="fs-sm">...</textarea>
+          <div class="btnbox">
+            <button class="btn btn-primary fs-sm" onclick="playGame('rock')">
+              Rock</button
+            ><button class="btn btn-primary fs-sm" onclick="playGame('paper')">
+              Paper</button
+            ><button
+              class="btn btn-primary fs-sm"
+              onclick="playGame('scissors')"
+            >
+              Scissors
+            </button>
+            <button class="btn btn-primary fs-sm" onclick="playGame('reset')">
+              Reset
+            </button>
           </div>
         </div>
-        <div class="scores">
-          <div class="number">Wins: <span id="win">0</span></div>
-          <div class="number">Losses: <span id="lose">0</span></div>
-          <div class="number">Draws: <span id="draw">0</span></div>
+        <div class="scorebox">
+          <p class="number fs-sm">Wins: <span id="wins">0</span></p>
+          <p class="number fs-sm">Losses: <span id="losses">0</span></p>
+          <p class="number fs-sm">Draws: <span id="draws">0</span></p>
         </div>
       </div>
     </div>

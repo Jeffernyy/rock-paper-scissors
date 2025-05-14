@@ -1,103 +1,84 @@
-const scores = {
+const scores = JSON.parse(localStorage.getItem("scores")) || {
   wins: 0,
   losses: 0,
-  ties: 0,
+  draws: 0,
 };
 
-function runGame(playerChoice) {
+document.addEventListener("DOMContentLoaded", updateScoreboard);
+
+function playGame(playerChoice) {
   const computerChoice = getComputerChoice();
   let result = "";
 
-  if (playerChoice === "rock") {
-    switch (computerChoice) {
-      case "rock":
-        result = "tie";
-        break;
-      case "paper":
-        result = "lose";
-        break;
-      case "scissors":
-        result = "win";
-        break;
-      default:
-        console.log("Error");
-    }
-  } else if (playerChoice === "paper") {
-    switch (computerChoice) {
-      case "rock":
-        result = "win";
-        break;
-      case "paper":
-        result = "tie";
-        break;
-      case "scissors":
-        result = "lose";
-        break;
-      default:
-        console.log("Error");
-    }
-  } else if (playerChoice === "scissors") {
-    switch (computerChoice) {
-      case "rock":
-        result = "lose";
-        break;
-      case "paper":
-        result = "win";
-        break;
-      case "scissors":
-        result = "tie";
-        break;
-      default:
-        console.log("Error");
-    }
+  switch (playerChoice) {
+    case "rock":
+      if (computerChoice === "rock") result = "draw";
+      else if (computerChoice === "paper") result = "lose";
+      else result = "win";
+      break;
+
+    case "paper":
+      if (computerChoice === "rock") result = "win";
+      else if (computerChoice === "paper") result = "draw";
+      else result = "lose";
+      break;
+
+    case "scissors":
+      if (computerChoice === "rock") result = "lose";
+      else if (computerChoice === "paper") result = "win";
+      else result = "draw";
+      break;
+
+    case "reset":
+      resetScore();
+      updateScoreboard();
+      return;
+
+    default:
+      console.log("Error");
+      return;
   }
 
   document.getElementById(
-    "display"
-  ).innerText = `You picked "${playerChoice}". Computer picked "${computerChoice}". The result is "${result}".`;
+    "result"
+  ).innerText = `You picked ${playerChoice}. The computer picked ${computerChoice}. The result is a ${result}.`;
 
-  switch (result) {
-    case "win":
-      scores.wins = scores.wins + 1;
-      break;
-    case "lose":
-      scores.losses = scores.losses + 1;
-      break;
-    case "tie":
-      scores.ties = scores.ties + 1;
-      break;
-    default:
-      console.log("Error");
-  }
+  if (result === "win") scores.wins += 1;
+  else if (result === "lose") scores.losses += 1;
+  else scores.draws += 1;
 
-  document.getElementById("win").innerText = scores.wins;
-  document.getElementById("lose").innerText = scores.losses;
-  document.getElementById("tie").innerText = scores.ties;
+  localStorage.setItem("scores", JSON.stringify(scores));
+
+  updateScoreboard();
 }
 
 function getComputerChoice() {
-  const randomNumber = Math.random();
+  const computerChoice = Math.random();
   let result = "";
 
-  if (randomNumber >= 0 && randomNumber < 1 / 3) {
+  if (computerChoice >= 0 && computerChoice < 1 / 3) {
     result = "rock";
-  } else if (randomNumber >= 1 / 3 && randomNumber < 2 / 3) {
+  } else if (computerChoice >= 1 / 3 && computerChoice < 2 / 3) {
     result = "paper";
-  } else if (randomNumber >= 2 / 3 && randomNumber < 1) {
+  } else {
     result = "scissors";
   }
 
   return result;
 }
 
-document.getElementById("rock").addEventListener("click", () => {
-  runGame("rock");
-});
+function updateScoreboard() {
+  document.getElementById("wins").innerText = scores.wins;
+  document.getElementById("losses").innerText = scores.losses;
+  document.getElementById("draws").innerText = scores.draws;
+}
 
-document.getElementById("paper").addEventListener("click", () => {
-  runGame("paper");
-});
+function resetScore() {
+  localStorage.removeItem("scores");
 
-document.getElementById("scissors").addEventListener("click", () => {
-  runGame("scissors");
-});
+  scores.wins = 0;
+  scores.losses = 0;
+  scores.draws = 0;
+
+  document.getElementById("result").innerText = "...";
+}
