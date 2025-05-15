@@ -11,7 +11,7 @@
     <meta name="description" content="rock paper scissors" />
     <meta name="keywords" content="rock paper scissors" />
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js" defer></script>
+    <script src="advanced.js" defer></script>
   </head>
   <body>
     <div class="container">
@@ -25,19 +25,16 @@
           </p>
         </div>
         <div class="formbox">
-          <textarea id="result" class="fs-sm">...</textarea>
+          <textarea id="result" class="fs-sm">Loading...</textarea>
           <div class="btnbox">
-            <button class="btn btn-primary fs-sm" onclick="playGame('rock')">
+            <button class="btn btn-primary fs-sm" data-choice="rock">
               Rock</button
-            ><button class="btn btn-primary fs-sm" onclick="playGame('paper')">
+            ><button class="btn btn-primary fs-sm" data-choice="paper">
               Paper</button
-            ><button
-              class="btn btn-primary fs-sm"
-              onclick="playGame('scissors')"
-            >
+            ><button class="btn btn-primary fs-sm" data-choice="scissors">
               Scissors
             </button>
-            <button class="btn btn-primary fs-sm" onclick="playGame('reset')">
+            <button class="btn btn-primary fs-sm" data-choice="reset">
               Reset
             </button>
           </div>
