@@ -28,7 +28,10 @@ const scores = JSON.parse(localStorage.getItem("scores")) || {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-  updateScoreboard();
+  document.getElementById("wins").innerText = "Loading...";
+  document.getElementById("losses").innerText = "Loading...";
+  document.getElementById("draws").innerText = "Loading...";
+
   getLastResult();
 });
 
@@ -88,6 +91,10 @@ function getLastResult() {
       "result"
     ).innerText = `Getting the last result ${timeleft} seconds...`;
 
+    document.getElementById("wins").innerText = "Loading...";
+    document.getElementById("losses").innerText = "Loading...";
+    document.getElementById("draws").innerText = "Loading...";
+
     if (timeleft <= 1) {
       clearInterval(timer);
 
@@ -96,8 +103,13 @@ function getLastResult() {
 
         if (lastResult) {
           document.getElementById("result").innerText = lastResult;
+          updateScoreboard();
         } else {
-          document.getElementById("result").innerText = "No record found!";
+          document.getElementById("result").innerText = "Enjoy the game!";
+
+          document.getElementById("wins").innerText = "No score found!";
+          document.getElementById("losses").innerText = "No score found!";
+          document.getElementById("draws").innerText = "No score found!";
         }
       }, 1000);
     }
